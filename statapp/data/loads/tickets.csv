@@ -1,0 +1,12 @@
+ticketId,ticketTitle,ticketDescription,functionalArea,creator,assignee,ticketPriority,ticketStatus,dateCreated,dateStarted,dateClosed
+STT0001111,repeat address line issue,address lines repeating on order confirmation form,1,STU0000010,STU0000038,3,3,20170804,20170804,20170804
+STT0001112,delivery failure,delivery on job ST1234567 not delivered,2,STU0000002,STU0000012,2,1,20170804,20170804,20170804
+STT0001113,XML failed to print,XML failed to print on shipping label,1,STU0000033,STU0000018,1,4,20170804,20170804,20170804
+STT0001114,new email causing issues on invoice,client with new email address causing forms as existing,3,STU0000024,STU0000030,3,2,20170804,20170804,20170804
+STT0001115,new material code req'd,new material code required for 1TB SSD product 0128910710,2,STU0000019,STU0000012,3,2,20170804,20170804,20170804
+STT0001116,develop new form with dated changes,create new form template for ticket control,1,STU0000014,STU0000028,2,3,20170804,20170804,20170804
+STT0001117,delivery failure,delivery on job ST1234567 not delivered,2,STU0000044,STU0000012,2,1,20170804,20170804,20170804
+STT0001118,XML failed to print,XML failed to print on shipping label,1,STU0000032,STU0000008,1,4,20170804,20170804,20170804
+STT0001119,new email causing issues on invoice,client with new email address causing forms as existing,3,STU0000014,STU0000030,3,2,20170804,20170804,20170804
+STT0001120,new material code req'd,new material code required for 1TB SSD product 0128910710,2,STU0000041,STU0000012,3,2,20170804,20170804,20170804
+STT0001121,develop new form with dated changes,create new form template for ticket control,1,STU0000030,STU0000039,2,3,20170804,20170804,20170804

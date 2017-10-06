@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_FUNCAREA_QUERY" applyPrivilegeType="ANALYTIC_PRIVILEGE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="2.3" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<descriptions defaultDescription="All Functional Areas"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="dev.dev01.statapp.data::STAT.FunctionalAreas" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.FunctionalAreas"/>
+  </DataSource>
+  <DataSource id="dev.dev01.statapp.data::STAT.Users" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Users"/>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="FunctionalArea" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="defaultUser_userId"/>
+      <viewAttribute id="description"/>
+      <viewAttribute id="value"/>
+      <viewAttribute id="DefaultUseremail"/>
+      <viewAttribute id="DefaultUserFirstName"/>
+      <viewAttribute id="DefaultUserLastName"/>
+      <viewAttribute id="DefaultUserId"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#dev.dev01.statapp.data::STAT.FunctionalAreas">
+      <mapping xsi:type="Calculation:AttributeMapping" target="defaultUser_userId" source="defaultUser.userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="description" source="description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="value" source="value"/>
+    </input>
+    <input node="#dev.dev01.statapp.data::STAT.Users">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DefaultUseremail" source="email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DefaultUserFirstName" source="firstName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DefaultUserLastName" source="lastName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DefaultUserId" source="userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="defaultUser_userId" source="userId"/>
+    </input>
+    <joinAttribute name="defaultUser_userId"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="FunctionalArea">
+  <attributes>
+    <attribute id="defaultUser_userId" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="defaultUser_userId"/>
+      <keyMapping columnObjectName="FunctionalArea" columnName="defaultUser_userId"/>
+    </attribute>
+    <attribute id="description" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="description"/>
+      <keyMapping columnObjectName="FunctionalArea" columnName="description"/>
+    </attribute>
+    <attribute id="value" key="true" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="value"/>
+      <keyMapping columnObjectName="FunctionalArea" columnName="value"/>
+    </attribute>
+    <attribute id="DefaultUserEmail" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="email"/>
+      <keyMapping columnObjectName="FunctionalArea" columnName="DefaultUseremail"/>
+    </attribute>
+    <attribute id="DefaultUserFirstName" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="firstName"/>
+      <keyMapping columnObjectName="FunctionalArea" columnName="DefaultUserFirstName"/>
+    </attribute>
+    <attribute id="DefaultUserLastName" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="lastName"/>
+      <keyMapping columnObjectName="FunctionalArea" columnName="DefaultUserLastName"/>
+    </attribute>
+    <attribute id="DefaultUserId" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="userId"/>
+      <keyMapping columnObjectName="FunctionalArea" columnName="DefaultUserId"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="FunctionalArea" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="87" y="247"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

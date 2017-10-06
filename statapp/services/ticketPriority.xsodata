@@ -1,0 +1,10 @@
+service {
+
+    "dev.dev01.statapp.calcmodels/CV_TICKETPRIORITY_QUERY.calculationview" as "TicketPriorities" keys ("value");
+    
+}
+
+settings {
+    support null;
+}
+

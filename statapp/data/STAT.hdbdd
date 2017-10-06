@@ -1,0 +1,90 @@
+namespace dev.dev01.statapp.data;
+@Schema: '10XCODING'
+ 
+context STAT {
+
+    type BusinessKey: String(10);
+    type SString: String(40);
+    type MString: String(80);
+    type VLString: String(1024);
+    type SDate: LocalDate;
+    type Enumeration: Integer;
+    // type PhoneNumer: String(10);
+	
+    @Catalog.tableType : #COLUMN 
+	Entity Tickets {
+        
+		key ticketId: BusinessKey;
+		
+		ticketTitle: SString;
+		ticketDescription: VLString;
+		
+		functionalArea: Association[1] to FunctionalAreas {value};
+		
+		creator: Association[1] to Users {userId};  
+		assignee:  Association[1] to Users {userId};
+		
+		ticketPriority: Association[1] to TicketPriorities {value};
+		ticketStatus: Association[1] to TicketStatuses {value};
+		
+		dateCreated: SDate; //default set to current date
+		dateStarted: SDate;
+		dateClosed: SDate;
+	};
+	
+    @Catalog.tableType : #COLUMN 
+	Entity Users {
+		key userId: BusinessKey;
+		firstName: SString;
+		lastName: SString;
+		email: SString;
+// 		phone: PhoneNumber;
+	};
+	
+    @Catalog.tableType : #COLUMN 
+	Entity FunctionalAreas {
+		key value: Enumeration;
+		description: SString;
+		defaultUser: Association[1] to Users {userId};
+	};
+	
+    @Catalog.tableType : #COLUMN 
+	Entity TicketPriorities {
+		key value: Enumeration;
+		description: SString;
+	};
+	
+    @Catalog.tableType : #COLUMN 
+	Entity TicketStatuses {
+		key value: Enumeration;
+		description: SString;
+	};
+	
+	
+// 	context procedures {
+// 	    type userProcedures {
+//     		uid: BusinessKey;
+//     		firstName: SString;
+//     		lastName: SString;
+// 	    };
+// 	    type ticketProcedures {
+//     		tid: BusinessKey;
+//     		title: SString;
+//     		description: SString;
+//     		creator: Association[1] to Users {uid};  
+//     		assignee:  Association[1] to Users {uid};
+//     		dateCreated: SDate;
+//     		dateStarted: SDate;
+//     		dateClosed: SDate;
+//     		ticketPriority: Priority;
+//     		status: Status;
+// 	    };
+// 	    type errors {
+// 	        HTTP_STATUS_CODE : Integer;
+// 	        ERROR_MESSAGE : String(100);
+// 	        DETAIL : String(100);
+// 	    };
+// 	}
+	
+};
+

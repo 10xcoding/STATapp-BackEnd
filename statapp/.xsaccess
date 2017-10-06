@@ -1,0 +1,17 @@
+{
+    "exposed": true,
+    "authentication": null,
+    "mime_mapping": [{
+        "extension": "jpg",
+        "mimetype": "image/jpeg"
+    }],
+    "force_ssl": false,
+    "enable_etags": true,
+    "prevent_xsrf": true,
+    "anonymous_connection": "dev.dev01.statapp::Anonymous_Access",
+    "cors": [{
+        "enabled": false
+    }],
+    "cache_control": "no-cache, no-store",
+    "default_file": "index.html"
+}

@@ -1,0 +1,7 @@
+import = [
+{
+	table = "dev.dev01.statapp.data::STAT.Users";
+	schema = "10XCODING";
+	file = "dev.dev01.statapp.data.loads:users.csv";
+	header = true;
+}];

@@ -1,0 +1,10 @@
+service {
+    
+    "dev.dev01.statapp.calcmodels/CV_TICKET_QUERY.calculationview" as "Tickets" keys ("ticketId");
+    
+}
+
+settings {
+    support null;
+}
+

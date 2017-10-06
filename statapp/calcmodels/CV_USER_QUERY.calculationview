@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_USER_QUERY" applyPrivilegeType="ANALYTIC_PRIVILEGE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="2.3" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<descriptions defaultDescription="All Users"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="dev.dev01.statapp.data::STAT.Users" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Users"/>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="dev.dev01.statapp.data::STAT.Users">
+  <attributes>
+    <attribute id="email" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="email"/>
+      <keyMapping schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Users" columnName="email"/>
+    </attribute>
+    <attribute id="firstName" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="firstName"/>
+      <keyMapping schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Users" columnName="firstName"/>
+    </attribute>
+    <attribute id="lastName" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="lastName"/>
+      <keyMapping schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Users" columnName="lastName"/>
+    </attribute>
+    <attribute id="userId" key="true" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="userId"/>
+      <keyMapping schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Users" columnName="userId"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
