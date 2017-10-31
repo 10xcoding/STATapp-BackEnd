@@ -7,7 +7,7 @@
     }],
     "force_ssl": false,
     "enable_etags": true,
-    "prevent_xsrf": true,
+    "prevent_xsrf": false,
     "anonymous_connection": "dev.dev01.statapp::Anonymous_Access",
     "cors": [{
         "enabled": false

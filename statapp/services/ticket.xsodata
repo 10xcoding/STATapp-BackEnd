@@ -1,7 +1,13 @@
 service {
-    
+    // READ
     "dev.dev01.statapp.calcmodels/CV_TICKET_QUERY.calculationview" as "Tickets" keys ("ticketId");
-    
+    // CREATE
+    "dev.dev01.statapp.data::STAT.Tickets" as "CreateTicket" create using "dev.dev01.statapp.procedures::createTicket";
+    // UPDATE
+    "dev.dev01.statapp.data::STAT.Tickets" as "UpdateTicket" update using "dev.dev01.statapp.procedures::updateTicket";
+    "dev.dev01.statapp.data::STAT.Tickets" as "StartTicket"  update using "dev.dev01.statapp.procedures::startTicket";
+    "dev.dev01.statapp.data::STAT.Tickets" as "CloseTicket"  update using "dev.dev01.statapp.procedures::closeTicket";
+    // DELETE
 }
 
 settings {

@@ -1,0 +1,70 @@
+PROCEDURE "10XCODING"."dev.dev01.statapp.procedures::createTicket" (
+    IN intab "10XCODING"."dev.dev01.statapp.data::STAT.Tickets",
+    OUT outtab "10XCODING"."dev.dev01.statapp.data::STAT.procedures.errors"
+)
+    
+    LANGUAGE SQLSCRIPT
+    SQL SECURITY INVOKER AS
+    --DEFAULT SCHEMA <schema>
+    -- READS SQL DATA AS
+
+BEGIN
+
+    DECLARE lv_ticketid STRING;
+    DECLARE lv_tickettitle STRING;
+    DECLARE lv_ticketdescription STRING;
+    DECLARE lv_functionalarea STRING;
+    DECLARE lv_creator STRING;
+    DECLARE lv_assignee STRING;
+    DECLARE lv_ticketpriority STRING;
+    DECLARE lv_ticketstatus STRING;
+    DECLARE lv_datecreated STRING;
+    DECLARE lv_datestarted STRING;
+    DECLARE lv_dateclosed STRING;
+    
+    -- TODO : INPUT VALIDATION
+        -- CREATOR_USER_ID
+    -- TODO : GET DEFAULT USER FROM FUNCTIONAL_AREA_VALUE -> ASSIGNEE
+    
+    SELECT "ticketId", "ticketTitle", "ticketDescription",
+            "functionalArea.value", "creator.userId", "assignee.userId", "ticketPriority.value",
+            1, CURRENT_DATE "current date", NULL, NULL
+    INTO lv_ticketid, lv_tickettitle, lv_ticketdescription,
+            lv_functionalarea, lv_creator, lv_assignee, lv_ticketpriority,
+            lv_ticketstatus, lv_datecreated, lv_datestarted, lv_dateclosed
+    FROM :intab;
+    
+    -- TODO: replace hard-coded validation with NOT EXISTS
+    -- VVV  something like this??  VVV
+    -- IF NOT EXISTS (SELECT * FROM "dev.dev01.statapp.data::STAT.FunctionalAreas" WHERE 'value' = :lv_functionalArea) THEN
+    --     lv_functionalArea = 0;
+    -- END IF;
+    
+    -- TEMP SOLUTION: TO REMOVE
+    IF :lv_functionalarea > 4 OR :lv_functionalarea < 0 THEN
+        lv_functionalarea = 0;
+    END IF;
+    IF :lv_ticketpriority > 3 OR :lv_ticketpriority < 1 THEN
+        lv_ticketpriority = 3;
+    END IF;
+    -- TODO: check max length of ticket title and ticket description (truncate if necessary?)
+    
+    --TODO: fix this:
+    -- lv_assignee = SELECT "defaultUser.userId" FROM "10XCODING"."dev.dev01.statapp.data::STAT.FunctionalAreas" WHERE :lv_functionalArea = 'value';
+    
+    IF :lv_tickettitle = '' THEN
+        outtab = SELECT 500 AS http_status_code,
+            'Invalid ticket title ' || lv_ticketdescription AS error_message,
+                'Ticket title should not be empty' AS detail FROM DUMMY;
+    ELSEIF :lv_ticketdescription = '' THEN
+        outtab = SELECT 500 AS http_status_code,
+            'Invalid ticket description ' || lv_ticketdescription AS error_message,
+                'Ticket description should not be empty' AS detail FROM DUMMY;
+    ELSE
+        INSERT INTO "dev.dev01.statapp.data::STAT.Tickets"
+            VALUES (CONCAT('T',"dev.dev01.statapp.data::ticket".NEXTVAL), lv_tickettitle, lv_ticketdescription,
+                    lv_functionalarea, lv_creator, lv_assignee, lv_ticketpriority,
+                    lv_ticketstatus, lv_datecreated, lv_datestarted, lv_dateclosed);
+    END IF;
+
+END;

@@ -1,0 +1,34 @@
+PROCEDURE "10XCODING"."dev.dev01.statapp.procedures::startTicket" (
+    in intab "10XCODING"."dev.dev01.statapp.data::STAT.Tickets",
+    in exist "10XCODING"."dev.dev01.statapp.data::STAT.Tickets",
+    out outtab "10XCODING"."dev.dev01.statapp.data::STAT.Tickets"
+)
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   --READS SQL DATA AS
+   AS
+
+BEGIN
+
+    DECLARE lv_ticketid STRING;
+    DECLARE lv_ticketstatus STRING;
+    DECLARE lv_datestarted STRING;
+    
+    SELECT "ticketId", 2, CURRENT_DATE "current date"
+    INTO lv_ticketid, lv_ticketstatus, lv_datestarted
+    FROM :intab;
+
+    IF :lv_ticketid = '' THEN
+        outtab = SELECT "ticketId", "ticketTitle", "ticketDescription", "functionalArea.value",
+                        "creator.userId", "assignee.userId", "ticketPriority.value", "ticketStatus.value",
+                        "dateCreated", "dateStarted", "dateClosed"
+                        FROM :exist;
+    ELSE
+        UPDATE "10XCODING"."dev.dev01.statapp.data::STAT.Tickets"
+            SET "ticketStatus.value" = lv_ticketstatus,
+                "dateStarted" = lv_datestarted
+            WHERE "ticketId" = lv_ticketid;
+    END IF;
+   
+END
