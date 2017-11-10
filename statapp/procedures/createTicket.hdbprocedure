@@ -24,7 +24,6 @@ BEGIN
     
     -- TODO : INPUT VALIDATION
         -- CREATOR_USER_ID
-    -- TODO : GET DEFAULT USER FROM FUNCTIONAL_AREA_VALUE -> ASSIGNEE
     
     SELECT "ticketId", "ticketTitle", "ticketDescription",
             "functionalArea.value", "creator.userId", "assignee.userId", "ticketPriority.value",
@@ -39,18 +38,21 @@ BEGIN
     -- IF NOT EXISTS (SELECT * FROM "dev.dev01.statapp.data::STAT.FunctionalAreas" WHERE 'value' = :lv_functionalArea) THEN
     --     lv_functionalArea = 0;
     -- END IF;
-    
-    -- TEMP SOLUTION: TO REMOVE
+    -- PREVENT INVALID VALUES
     IF :lv_functionalarea > 4 OR :lv_functionalarea < 0 THEN
         lv_functionalarea = 0;
     END IF;
     IF :lv_ticketpriority > 3 OR :lv_ticketpriority < 1 THEN
         lv_ticketpriority = 3;
     END IF;
+    
     -- TODO: check max length of ticket title and ticket description (truncate if necessary?)
     
-    --TODO: fix this:
-    -- lv_assignee = SELECT "defaultUser.userId" FROM "10XCODING"."dev.dev01.statapp.data::STAT.FunctionalAreas" WHERE :lv_functionalArea = 'value';
+    -- SELECT DEFAULT USER AS ASSIGNEE
+    SELECT "defaultUser.userId"
+    INTO lv_assignee
+    FROM "10XCODING"."dev.dev01.statapp.data::STAT.FunctionalAreas"
+    WHERE "value" = lv_functionalArea;
     
     IF :lv_tickettitle = '' THEN
         outtab = SELECT 500 AS http_status_code,
