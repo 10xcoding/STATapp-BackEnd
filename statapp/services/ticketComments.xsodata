@@ -1,0 +1,14 @@
+service {
+
+    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "TicketsComments"  with ("commentId", "ticketId") keys ("ticketId")
+        navigates ("toCommentsAssn" as "itsComments");
+    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "Comment" keys ("commentId");
+        association "toCommentsAssn" principal "Comment"("ticketId") multiplicity "*"
+        dependent "TicketsComments"("ticketId") multiplicity "*";
+    
+}
+
+settings {
+    support null;
+}
+
