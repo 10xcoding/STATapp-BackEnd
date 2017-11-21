@@ -1,0 +1,27 @@
+PROCEDURE "10XCODING"."dev.dev01.statapp.procedures::openTicketCount" (
+    IN IN_TICKETS TABLE ( dateClosed DAYDATE ),
+    OUT OPEN_TICKET_COUNT INTEGER
+)
+    LANGUAGE SQLSCRIPT
+    SQL SECURITY INVOKER
+    READS SQL DATA AS
+
+BEGIN
+
+    DECLARE lv_dateClosed DAYDATE ARRAY;
+    DECLARE openTicketCount INTEGER := 0;
+    DECLARE i INTEGER := 1;
+    
+    lv_dateClosed = ARRAY_AGG(:IN_TICKETS.dateClosed);
+    
+    FOR i IN 1..CARDINALITY(:lv_dateClosed) DO
+    
+        IF :lv_dateClosed[:i] IS NULL THEN
+            openTicketCount := openTicketCount + 1;
+        END IF;
+    
+    END FOR;
+    
+    OPEN_TICKET_COUNT := openTicketCount;
+
+END

@@ -11,10 +11,29 @@ service {
     // READ
     "dev.dev01.statapp.calcmodels/CV_TICKET_QUERY.calculationview" as "Tickets" keys ("ticketId")
     create forbidden    update forbidden    delete forbidden;
-    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "TicketsComments" keys ("ticketId")
-    create forbidden    update forbidden    delete forbidden;
-    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "Comments" key ("commentId")
-    create forbidden    update forbidden    delete forbidden;
+//    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "TicketsComments" keys ("ticketId")
+//    create forbidden    update forbidden    delete forbidden;
+//    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "Comments" key ("commentId")
+//    create forbidden    update forbidden    delete forbidden;
+    
+    
+//    "<YourSchema>"."VBAK" as "POHeader" with ("MANDT","VBELN","ERDAT") navigates ("ToPoItemAssctn" as "ItemRef");
+//    "<YourSchema>"."VBAP" as "POItems" with ("MANDT","VBELN","POSNR","MATNR","ARKTX");
+//        association "ToPoItemAssctn" principal "POHeader"("VBELN") multiplicity "1"
+//        dependent "POItems"("VBELN") multiplicity "*";
+    
+    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "Tickets_" keys ("ticketId")
+        navigates ("toCommentsAssn" as "itsComments");
+    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "Comments_" keys ("commentId");
+        association "toCommentsAssn" principal "Comments_"("ticketId") multiplicity "*"
+        dependent "Tickets_"("ticketId") multiplicity "*";
+    
+//    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "Tickets_" key ("ticketId")
+//        navigates ("Ticket_Comment" as "itsComments");
+//
+//    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "TicketComments_" key ("commentId");
+//        association "Ticket_Comment" principal "Tickets_"("ticketId")   multiplicity "1"
+//        dependent   "TicketComments_"("commentId")                      multiplicity "*";
     
     
 //    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "Ticket_Comments" keys ("ticketId")

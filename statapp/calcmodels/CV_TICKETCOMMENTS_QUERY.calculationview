@@ -129,7 +129,7 @@
       <descriptions defaultDescription="author_userId"/>
       <keyMapping columnObjectName="author-ticketcomments" columnName="author_userId"/>
     </attribute>
-    <attribute id="commentId" order="5" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="commentId" key="true" order="5" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="commentId"/>
       <keyMapping columnObjectName="author-ticketcomments" columnName="commentId"/>
     </attribute>
@@ -203,7 +203,6 @@
     <shape expanded="true" modelObjectName="comments-ticket" modelObjectNameSpace="CalculationView">
       <upperLeftCorner x="275" y="416"/>
       <rectangleSize height="30" width="140"/>
-    </shape>
-  </shapes>
+    </shape></shapes>
 </layout>
 </Calculation:scenario>
