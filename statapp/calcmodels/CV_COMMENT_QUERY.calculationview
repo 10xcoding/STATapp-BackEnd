@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_COMMENT_QUERY" applyPrivilegeType="ANALYTIC_PRIVILEGE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="2.3" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_COMMENT_QUERY"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="dev.dev01.statapp.data::STAT.Tickets" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Tickets"/>
+  </DataSource>
+  <DataSource id="dev.dev01.statapp.data::STAT.Comments" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Comments"/>
+  </DataSource>
+  <DataSource id="dev.dev01.statapp.data::STAT.Users" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Users"/>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="author_userId"/>
+      <viewAttribute id="commentId"/>
+      <viewAttribute id="dateTime"/>
+      <viewAttribute id="text"/>
+      <viewAttribute id="ticket_ticketId"/>
+      <viewAttribute id="email"/>
+      <viewAttribute id="firstName"/>
+      <viewAttribute id="lastName"/>
+      <viewAttribute id="userId"/>
+      <viewAttribute id="ticketTitle"/>
+      <viewAttribute id="ticketDescription"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="author_userId" source="author_userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="commentId" source="commentId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateTime" source="dateTime"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="text" source="text"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticket_ticketId" source="ticket_ticketId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="email" source="email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="firstName" source="firstName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="lastName" source="lastName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="userId" source="userId"/>
+    </input>
+    <input node="#dev.dev01.statapp.data::STAT.Tickets">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketTitle" source="ticketTitle"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketDescription" source="ticketDescription"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticket_ticketId" source="ticketId"/>
+    </input>
+    <joinAttribute name="ticket_ticketId"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="author_userId"/>
+      <viewAttribute id="commentId"/>
+      <viewAttribute id="dateTime"/>
+      <viewAttribute id="text"/>
+      <viewAttribute id="ticket_ticketId"/>
+      <viewAttribute id="email"/>
+      <viewAttribute id="firstName"/>
+      <viewAttribute id="lastName"/>
+      <viewAttribute id="userId"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#dev.dev01.statapp.data::STAT.Comments">
+      <mapping xsi:type="Calculation:AttributeMapping" target="author_userId" source="author.userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="commentId" source="commentId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateTime" source="dateTime"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="text" source="text"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticket_ticketId" source="ticket.ticketId"/>
+    </input>
+    <input node="#dev.dev01.statapp.data::STAT.Users">
+      <mapping xsi:type="Calculation:AttributeMapping" target="email" source="email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="firstName" source="firstName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="lastName" source="lastName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="userId" source="userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="author_userId" source="userId"/>
+    </input>
+    <joinAttribute name="author_userId"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_2">
+  <attributes>
+    <attribute id="author_userId" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="author_userId"/>
+      <keyMapping columnObjectName="Join_2" columnName="author_userId"/>
+    </attribute>
+    <attribute id="commentId" key="true" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="commentId"/>
+      <keyMapping columnObjectName="Join_2" columnName="commentId"/>
+    </attribute>
+    <attribute id="dateTime" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="dateTime"/>
+      <keyMapping columnObjectName="Join_2" columnName="dateTime"/>
+    </attribute>
+    <attribute id="text" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="text"/>
+      <keyMapping columnObjectName="Join_2" columnName="text"/>
+    </attribute>
+    <attribute id="ticket_ticketId" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticket_ticketId"/>
+      <keyMapping columnObjectName="Join_2" columnName="ticket_ticketId"/>
+    </attribute>
+    <attribute id="email" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="email"/>
+      <keyMapping columnObjectName="Join_2" columnName="email"/>
+    </attribute>
+    <attribute id="firstName" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="firstName"/>
+      <keyMapping columnObjectName="Join_2" columnName="firstName"/>
+    </attribute>
+    <attribute id="lastName" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="lastName"/>
+      <keyMapping columnObjectName="Join_2" columnName="lastName"/>
+    </attribute>
+    <attribute id="userId" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="userId"/>
+      <keyMapping columnObjectName="Join_2" columnName="userId"/>
+    </attribute>
+    <attribute id="ticketTitle" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticketTitle"/>
+      <keyMapping columnObjectName="Join_2" columnName="ticketTitle"/>
+    </attribute>
+    <attribute id="ticketDescription" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticketDescription"/>
+      <keyMapping columnObjectName="Join_2" columnName="ticketDescription"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="91" y="256"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="87" y="364"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

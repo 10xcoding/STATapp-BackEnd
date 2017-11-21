@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_TICKETCOMMENTS_QUERY" applyPrivilegeType="ANALYTIC_PRIVILEGE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="2.3" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_TICKET_QUERY"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="dev.dev01.statapp.data::STAT.Users" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Users"/>
+  </DataSource>
+  <DataSource id="dev.dev01.statapp.data::STAT.Comments" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Comments"/>
+  </DataSource>
+  <DataSource id="dev.dev01.statapp.data::STAT.Tickets" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Tickets"/>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="author-ticketcomments" joinType="rightOuter">
+    <viewAttributes>
+      <viewAttribute id="email"/>
+      <viewAttribute id="firstName"/>
+      <viewAttribute id="lastName"/>
+      <viewAttribute id="author_userId"/>
+      <viewAttribute id="commentId"/>
+      <viewAttribute id="dateTime"/>
+      <viewAttribute id="text"/>
+      <viewAttribute id="creator_userId"/>
+      <viewAttribute id="assignee_userId"/>
+      <viewAttribute id="dateClosed"/>
+      <viewAttribute id="dateCreated"/>
+      <viewAttribute id="dateStarted"/>
+      <viewAttribute id="functionalArea_value"/>
+      <viewAttribute id="ticketDescription"/>
+      <viewAttribute id="ticketId"/>
+      <viewAttribute id="ticketPriority_value"/>
+      <viewAttribute id="ticketStatus_value"/>
+      <viewAttribute id="ticketTitle"/>
+      <viewAttribute id="JOIN$userId$author_userId" hidden="true"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#dev.dev01.statapp.data::STAT.Users">
+      <mapping xsi:type="Calculation:AttributeMapping" target="email" source="email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="firstName" source="firstName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="lastName" source="lastName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$userId$author_userId" source="userId"/>
+    </input>
+    <input node="#comments-ticket">
+      <mapping xsi:type="Calculation:AttributeMapping" target="author_userId" source="author_userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="commentId" source="commentId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateTime" source="dateTime"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="text" source="text"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="creator_userId" source="creator_userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="assignee_userId" source="assignee_userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateClosed" source="dateClosed"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateCreated" source="dateCreated"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateStarted" source="dateStarted"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="functionalArea_value" source="functionalArea_value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketDescription" source="ticketDescription"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketId" source="ticketId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketPriority_value" source="ticketPriority_value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketStatus_value" source="ticketStatus_value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketTitle" source="ticketTitle"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$userId$author_userId" source="author_userId"/>
+    </input>
+    <joinAttribute name="JOIN$userId$author_userId"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="comments-ticket" joinType="inner" cardinality="CN_1">
+    <viewAttributes>
+      <viewAttribute id="author_userId"/>
+      <viewAttribute id="commentId"/>
+      <viewAttribute id="dateTime"/>
+      <viewAttribute id="text"/>
+      <viewAttribute id="creator_userId"/>
+      <viewAttribute id="assignee_userId"/>
+      <viewAttribute id="dateClosed"/>
+      <viewAttribute id="dateCreated"/>
+      <viewAttribute id="dateStarted"/>
+      <viewAttribute id="functionalArea_value"/>
+      <viewAttribute id="ticketDescription"/>
+      <viewAttribute id="ticketId"/>
+      <viewAttribute id="ticketPriority_value"/>
+      <viewAttribute id="ticketStatus_value"/>
+      <viewAttribute id="ticketTitle"/>
+      <viewAttribute id="JOIN$ticket.ticketId$ticketId" hidden="true"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#dev.dev01.statapp.data::STAT.Comments">
+      <mapping xsi:type="Calculation:AttributeMapping" target="author_userId" source="author.userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="commentId" source="commentId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateTime" source="dateTime"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="text" source="text"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ticket.ticketId$ticketId" source="ticket.ticketId"/>
+    </input>
+    <input node="#dev.dev01.statapp.data::STAT.Tickets">
+      <mapping xsi:type="Calculation:AttributeMapping" target="creator_userId" source="creator.userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="assignee_userId" source="assignee.userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateClosed" source="dateClosed"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateCreated" source="dateCreated"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateStarted" source="dateStarted"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="functionalArea_value" source="functionalArea.value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketDescription" source="ticketDescription"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketId" source="ticketId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketPriority_value" source="ticketPriority.value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketStatus_value" source="ticketStatus.value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketTitle" source="ticketTitle"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ticket.ticketId$ticketId" source="ticketId"/>
+    </input>
+    <joinAttribute name="JOIN$ticket.ticketId$ticketId"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="author-ticketcomments">
+  <attributes>
+    <attribute id="email" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="email"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="email"/>
+    </attribute>
+    <attribute id="firstName" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="firstName"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="firstName"/>
+    </attribute>
+    <attribute id="lastName" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="lastName"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="lastName"/>
+    </attribute>
+    <attribute id="author_userId" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="author_userId"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="author_userId"/>
+    </attribute>
+    <attribute id="commentId" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="commentId"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="commentId"/>
+    </attribute>
+    <attribute id="dateTime" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="dateTime"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="dateTime"/>
+    </attribute>
+    <attribute id="text" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="text"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="text"/>
+    </attribute>
+    <attribute id="creator_userId" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="creator_userId"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="creator_userId"/>
+    </attribute>
+    <attribute id="assignee_userId" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="assignee_userId"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="assignee_userId"/>
+    </attribute>
+    <attribute id="dateClosed" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="dateClosed"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="dateClosed"/>
+    </attribute>
+    <attribute id="dateCreated" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="dateCreated"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="dateCreated"/>
+    </attribute>
+    <attribute id="dateStarted" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="dateStarted"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="dateStarted"/>
+    </attribute>
+    <attribute id="functionalArea_value" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="functionalArea_value"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="functionalArea_value"/>
+    </attribute>
+    <attribute id="ticketDescription" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticketDescription"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="ticketDescription"/>
+    </attribute>
+    <attribute id="ticketId" key="true" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticketId"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="ticketId"/>
+    </attribute>
+    <attribute id="ticketPriority_value" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticketPriority_value"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="ticketPriority_value"/>
+    </attribute>
+    <attribute id="ticketStatus_value" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticketStatus_value"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="ticketStatus_value"/>
+    </attribute>
+    <attribute id="ticketTitle" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticketTitle"/>
+      <keyMapping columnObjectName="author-ticketcomments" columnName="ticketTitle"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+    <shape expanded="true" modelObjectName="author-ticketcomments" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="214" y="178"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="comments-ticket" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="275" y="416"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

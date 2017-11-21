@@ -1,0 +1,14 @@
+service {
+    // READ
+    "dev.dev01.statapp.calcmodels/CV_COMMENT_QUERY.calculationview" as "Comments" keys ("commentId");
+    // CREATE
+    "dev.dev01.statapp.data::STAT.Comments" as "CreateComment" create using "dev.dev01.statapp.procedures::createComment";
+    // UPDATE
+    //"dev.dev01.statapp.data::STAT.Comments" as "UpdateComment" update using "dev.dev01.statapp.procedures::updateComment";
+    // DELETE
+}
+
+settings {
+    support null;
+}
+

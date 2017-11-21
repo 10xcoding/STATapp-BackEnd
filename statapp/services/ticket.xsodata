@@ -1,13 +1,44 @@
 service {
+
+//    "dev.dev01.statapp.calcmodels/CV_TICKET_QUERY.calculationview" as "Tickets" key ("ticketId") navigates
+//        ("Ticket_Comments" as "its_comments");
+//
+//    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "Comments" key ("commentId");
+//    
+//    association "Ticket_Comments"   principal "Tickets"("ticketId") multiplicity "1"
+//                                    dependent "Comments"("commentId") multiplicity "*";
+
     // READ
-    "dev.dev01.statapp.calcmodels/CV_TICKET_QUERY.calculationview" as "Tickets" keys ("ticketId");
+    "dev.dev01.statapp.calcmodels/CV_TICKET_QUERY.calculationview" as "Tickets" keys ("ticketId")
+    create forbidden    update forbidden    delete forbidden;
+    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "TicketsComments" keys ("ticketId")
+    create forbidden    update forbidden    delete forbidden;
+    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "Comments" key ("commentId")
+    create forbidden    update forbidden    delete forbidden;
+    
+    
+//    "dev.dev01.statapp.calcmodels/CV_TICKETCOMMENTS_QUERY.calculationview" as "Ticket_Comments" keys ("ticketId")
+//                                    navigates ("Ticket_Comments" as "itsComments")
+//    create forbidden    update forbidden    delete forbidden;
+    
+//    association "Ticket_Comments"   principal "Tickets"("ticketId") multiplicity "1"
+//                                    dependent "Comments"("ticketId") multiplicity "*";
+    
+    
     // CREATE
-    "dev.dev01.statapp.data::STAT.Tickets" as "CreateTicket" create using "dev.dev01.statapp.procedures::createTicket";
+    "dev.dev01.statapp.data::STAT.Tickets" as "CreateTicket" create using "dev.dev01.statapp.procedures::createTicket"
+                        update forbidden    delete forbidden;
+    
     // UPDATE
-    "dev.dev01.statapp.data::STAT.Tickets" as "UpdateTicket" update using "dev.dev01.statapp.procedures::updateTicket";
-    "dev.dev01.statapp.data::STAT.Tickets" as "StartTicket"  update using "dev.dev01.statapp.procedures::startTicket";
-    "dev.dev01.statapp.data::STAT.Tickets" as "CloseTicket"  update using "dev.dev01.statapp.procedures::closeTicket";
+    "dev.dev01.statapp.data::STAT.Tickets" as "UpdateTicket" update using "dev.dev01.statapp.procedures::updateTicket"
+    create forbidden                        delete forbidden;
+    "dev.dev01.statapp.data::STAT.Tickets" as "StartTicket"  update using "dev.dev01.statapp.procedures::startTicket"
+    create forbidden                        delete forbidden;
+    "dev.dev01.statapp.data::STAT.Tickets" as "CloseTicket"  update using "dev.dev01.statapp.procedures::closeTicket"
+    create forbidden                        delete forbidden;
+    
     // DELETE
+    
 }
 
 settings {

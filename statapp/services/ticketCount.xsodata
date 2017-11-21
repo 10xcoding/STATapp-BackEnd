@@ -1,0 +1,12 @@
+service {
+    //create forbidden    update forbidden    delete forbidden;
+    "dev.dev01.statapp.calcmodels/CV_TICKET_QUERY.calculationview"
+        
+        
+        as "OpenTicketCount"
+       keys generate local "openTicketCount"
+       aggregates always (SUM of "countOpen");
+}
+settings {
+    support null;
+}

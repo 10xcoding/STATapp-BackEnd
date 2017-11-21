@@ -1,0 +1,43 @@
+PROCEDURE "10XCODING"."dev.dev01.statapp.procedures::createComment" (
+    IN intab "10XCODING"."dev.dev01.statapp.data::STAT.Comments",
+    OUT outtab "10XCODING"."dev.dev01.statapp.data::STAT.procedures.errors"
+)
+    
+    LANGUAGE SQLSCRIPT
+    SQL SECURITY INVOKER AS
+    --DEFAULT SCHEMA <schema>
+    -- READS SQL DATA AS
+
+BEGIN
+
+    DECLARE lv_commentid STRING;
+    DECLARE lv_text STRING;
+    DECLARE lv_author STRING;
+    DECLARE lv_ticket STRING;
+    DECLARE lv_datetimesec STRING;
+    
+    -- TODO : INPUT VALIDATION
+        -- TICKET_TICKET_ID
+        -- AUTHOR_USER_ID
+    
+    SELECT "commentId", "text", "author.userId", "ticket.ticketId", CURRENT_TIMESTAMP
+    INTO lv_commentid, lv_text, lv_author, lv_ticket, lv_datetimesec
+    FROM :intab;
+    
+    -- TODO: validation with NOT EXISTS
+    -- IF NOT EXISTS (SELECT * FROM "dev.dev01.statapp.data::STAT.Tickets" WHERE 'ticketId' = :lv_ticket) THEN
+    --     // Return error
+    -- END IF;
+    -- PREVENT INVALID VALUES
+    -- TODO: check max length of comment text
+    
+    IF :lv_text = '' THEN
+        outtab = SELECT 500 AS http_status_code,
+            'Invalid comment ' || lv_text AS error_message,
+                'Comment should not be empty' AS detail FROM DUMMY;
+    ELSE
+        INSERT INTO "dev.dev01.statapp.data::STAT.Comments"
+            VALUES (CONCAT('C',"dev.dev01.statapp.data::comment".NEXTVAL), lv_text, lv_author, lv_ticket, lv_datetimesec);
+    END IF;
+
+END;

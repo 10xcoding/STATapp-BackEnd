@@ -48,11 +48,11 @@ BEGIN
     
     -- TODO: check max length of ticket title and ticket description (truncate if necessary?)
     
-    -- SELECT DEFAULT USER AS ASSIGNEE
-    SELECT "defaultUser.userId"
-    INTO lv_assignee
-    FROM "10XCODING"."dev.dev01.statapp.data::STAT.FunctionalAreas"
-    WHERE "value" = lv_functionalArea;
+    -- -- SELECT DEFAULT USER AS ASSIGNEE
+    -- SELECT "defaultUser.userId"
+    -- INTO lv_assignee
+    -- FROM "10XCODING"."dev.dev01.statapp.data::STAT.FunctionalAreas"
+    -- WHERE "value" = lv_functionalArea;
     
     IF :lv_tickettitle = '' THEN
         outtab = SELECT 500 AS http_status_code,

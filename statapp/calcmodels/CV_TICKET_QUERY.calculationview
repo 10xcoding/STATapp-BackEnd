@@ -400,7 +400,14 @@
       <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="lastName_assignee"/>
     </attribute>
   </attributes>
-  <calculatedAttributes/>
+  <calculatedAttributes>
+    <calculatedAttribute id="countOpen" order="25" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false" hidden="false">
+      <descriptions defaultDescription="countOpen"/>
+      <keyCalculation datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
+        <formula>if(isnull(&quot;dateClosed&quot;), 1, 0)</formula>
+      </keyCalculation>
+    </calculatedAttribute>
+  </calculatedAttributes>
   <baseMeasures/>
   <calculatedMeasures/>
   <restrictedMeasures/>

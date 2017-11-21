@@ -4,10 +4,12 @@ namespace dev.dev01.statapp.data;
 context STAT {
 
     type BusinessKey: String(10);
+    type CommentKey: String(10); // hana.ALPHANUM(10);
     type SString: String(40);
     type MString: String(80);
     type VLString: String(1024);
     type SDate: LocalDate;
+    type DateTimeSec: UTCTimestamp;
     type Enumeration: Integer;
     // type PhoneNumer: String(10);
 	
@@ -16,7 +18,7 @@ context STAT {
         
 		key ticketId: BusinessKey;
 		
-		ticketTitle: SString;
+		ticketTitle: MString;
 		ticketDescription: VLString;
 		
 		functionalArea: Association[1] to FunctionalAreas {value};
@@ -27,7 +29,7 @@ context STAT {
 		ticketPriority: Association[1] to TicketPriorities {value};
 		ticketStatus: Association[1] to TicketStatuses {value};
 		
-		dateCreated: SDate; //default set to current date
+		dateCreated: SDate;
 		dateStarted: SDate;
 		dateClosed: SDate;
 	};
@@ -60,31 +62,22 @@ context STAT {
 		description: SString;
 	};
 	
+    @Catalog.tableType : #COLUMN 
+	Entity Comments {
+		key commentId: CommentKey;
+		text: VLString;
+		author: Association[1] to Users {userId};  
+		ticket: Association[1] to Tickets {ticketId};
+		dateTime: DateTimeSec;
+	};
 	
-// 	context procedures {
-// 	    type userProcedures {
-//     		uid: BusinessKey;
-//     		firstName: SString;
-//     		lastName: SString;
-// 	    };
-// 	    type ticketProcedures {
-//     		tid: BusinessKey;
-//     		title: SString;
-//     		description: SString;
-//     		creator: Association[1] to Users {uid};  
-//     		assignee:  Association[1] to Users {uid};
-//     		dateCreated: SDate;
-//     		dateStarted: SDate;
-//     		dateClosed: SDate;
-//     		ticketPriority: Priority;
-//     		status: Status;
-// 	    };
-// 	    type errors {
-// 	        HTTP_STATUS_CODE : Integer;
-// 	        ERROR_MESSAGE : String(100);
-// 	        DETAIL : String(100);
-// 	    };
-// 	}
+	context procedures {
+        type errors {
+            HTTP_STATUS_CODE : Integer;
+            ERROR_MESSAGE : String(100);
+            DETAIL : String(100);
+        };
+	}
 	
 };
 
