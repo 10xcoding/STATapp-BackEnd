@@ -4,17 +4,13 @@
 <localVariables/>
 <variableMappings/>
 <dataSources>
-  <DataSource id="dev.dev01.statapp.data::STAT.FunctionalAreas" type="DATA_BASE_TABLE">
-    <viewAttributes allViewAttributes="true"/>
-    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.FunctionalAreas"/>
-  </DataSource>
-  <DataSource id="dev.dev01.statapp.data::STAT.Users" type="DATA_BASE_TABLE">
-    <viewAttributes allViewAttributes="true"/>
-    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Users"/>
-  </DataSource>
   <DataSource id="dev.dev01.statapp.data::STAT.Tickets" type="DATA_BASE_TABLE">
     <viewAttributes allViewAttributes="true"/>
     <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Tickets"/>
+  </DataSource>
+  <DataSource id="dev.dev01.statapp.data::STAT.FunctionalAreas" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.FunctionalAreas"/>
   </DataSource>
   <DataSource id="dev.dev01.statapp.data::STAT.TicketPriorities" type="DATA_BASE_TABLE">
     <viewAttributes allViewAttributes="true"/>
@@ -24,7 +20,7 @@
     <viewAttributes allViewAttributes="true"/>
     <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.TicketStatuses"/>
   </DataSource>
-  <DataSource id="Join_5_Ticket_Creator$$$$dev.dev01.statapp.data::STAT.Users$$" type="DATA_BASE_TABLE">
+  <DataSource id="dev.dev01.statapp.data::STAT.Users" type="DATA_BASE_TABLE">
     <viewAttributes allViewAttributes="true"/>
     <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Users"/>
   </DataSource>
@@ -34,29 +30,6 @@
   </DataSource>
 </dataSources>
 <calculationViews>
-  <calculationView xsi:type="Calculation:JoinView" id="Join_1_Default_User" joinType="inner">
-    <viewAttributes>
-      <viewAttribute id="userId"/>
-      <viewAttribute id="description"/>
-      <viewAttribute id="value"/>
-      <viewAttribute id="email_defaultUser"/>
-      <viewAttribute id="firstName_defaultUser"/>
-      <viewAttribute id="lastName_defaultUser"/>
-    </viewAttributes>
-    <calculatedViewAttributes/>
-    <input node="#dev.dev01.statapp.data::STAT.FunctionalAreas">
-      <mapping xsi:type="Calculation:AttributeMapping" target="userId" source="defaultUser.userId"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="description" source="description"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="value" source="value"/>
-    </input>
-    <input node="#dev.dev01.statapp.data::STAT.Users">
-      <mapping xsi:type="Calculation:AttributeMapping" target="email_defaultUser" source="email"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="firstName_defaultUser" source="firstName"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="lastName_defaultUser" source="lastName"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="userId" source="userId"/>
-    </input>
-    <joinAttribute name="userId"/>
-  </calculationView>
   <calculationView xsi:type="Calculation:JoinView" id="Join_2_Ticket_Func" joinType="inner">
     <viewAttributes>
       <viewAttribute id="creator_userId"/>
@@ -70,11 +43,7 @@
       <viewAttribute id="ticketPriority_value"/>
       <viewAttribute id="ticketStatus_value"/>
       <viewAttribute id="ticketTitle"/>
-      <viewAttribute id="defaultUser_userId"/>
-      <viewAttribute id="description_functionalArea"/>
-      <viewAttribute id="email_functionalArea"/>
-      <viewAttribute id="firstName_functionalArea"/>
-      <viewAttribute id="lastName_functionalArea"/>
+      <viewAttribute id="functionalArea_description"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="#dev.dev01.statapp.data::STAT.Tickets">
@@ -90,12 +59,8 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketStatus_value" source="ticketStatus.value"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketTitle" source="ticketTitle"/>
     </input>
-    <input node="#Join_1_Default_User">
-      <mapping xsi:type="Calculation:AttributeMapping" target="defaultUser_userId" source="userId"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="description_functionalArea" source="description"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="email_functionalArea" source="email_defaultUser"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="firstName_functionalArea" source="firstName_defaultUser"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="lastName_functionalArea" source="lastName_defaultUser"/>
+    <input node="#dev.dev01.statapp.data::STAT.FunctionalAreas">
+      <mapping xsi:type="Calculation:AttributeMapping" target="functionalArea_description" source="description"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="functionalArea_value" source="value"/>
     </input>
     <joinAttribute name="functionalArea_value"/>
@@ -113,12 +78,9 @@
       <viewAttribute id="ticketPriority_value"/>
       <viewAttribute id="ticketStatus_value"/>
       <viewAttribute id="ticketTitle"/>
-      <viewAttribute id="defaultUser_userId"/>
-      <viewAttribute id="description_functionalArea"/>
-      <viewAttribute id="email_functionalArea"/>
-      <viewAttribute id="firstName_functionalArea"/>
-      <viewAttribute id="lastName_functionalArea"/>
-      <viewAttribute id="description_priority"/></viewAttributes>
+      <viewAttribute id="ticketPriority_description"/>
+      <viewAttribute id="functionalArea_description"/>
+    </viewAttributes>
     <calculatedViewAttributes/>
     <input node="#Join_2_Ticket_Func">
       <mapping xsi:type="Calculation:AttributeMapping" target="creator_userId" source="creator_userId"/>
@@ -132,14 +94,10 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketPriority_value" source="ticketPriority_value"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketStatus_value" source="ticketStatus_value"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketTitle" source="ticketTitle"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="defaultUser_userId" source="defaultUser_userId"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="description_functionalArea" source="description_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="email_functionalArea" source="email_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="firstName_functionalArea" source="firstName_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="lastName_functionalArea" source="lastName_functionalArea"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="functionalArea_description" source="functionalArea_description"/>
     </input>
     <input node="#dev.dev01.statapp.data::STAT.TicketPriorities">
-      <mapping xsi:type="Calculation:AttributeMapping" target="description_priority" source="description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketPriority_description" source="description"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketPriority_value" source="value"/>
     </input>
     <joinAttribute name="ticketPriority_value"/>
@@ -157,13 +115,10 @@
       <viewAttribute id="ticketPriority_value"/>
       <viewAttribute id="ticketStatus_value"/>
       <viewAttribute id="ticketTitle"/>
-      <viewAttribute id="defaultUser_userId"/>
-      <viewAttribute id="description_functionalArea"/>
-      <viewAttribute id="email_functionalArea"/>
-      <viewAttribute id="firstName_functionalArea"/>
-      <viewAttribute id="lastName_functionalArea"/>
-      <viewAttribute id="description_priority"/>
-      <viewAttribute id="description_status"/></viewAttributes>
+      <viewAttribute id="ticketPriority_description"/>
+      <viewAttribute id="ticketStatus_description"/>
+      <viewAttribute id="functionalArea_description"/>
+    </viewAttributes>
     <calculatedViewAttributes/>
     <input node="#Join_3_Ticket_Priority">
       <mapping xsi:type="Calculation:AttributeMapping" target="creator_userId" source="creator_userId"/>
@@ -177,14 +132,11 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketPriority_value" source="ticketPriority_value"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketStatus_value" source="ticketStatus_value"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketTitle" source="ticketTitle"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="defaultUser_userId" source="defaultUser_userId"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="description_functionalArea" source="description_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="email_functionalArea" source="email_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="firstName_functionalArea" source="firstName_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="lastName_functionalArea" source="lastName_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="description_priority" source="description_priority"/></input>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketPriority_description" source="ticketPriority_description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="functionalArea_description" source="functionalArea_description"/>
+    </input>
     <input node="#dev.dev01.statapp.data::STAT.TicketStatuses">
-      <mapping xsi:type="Calculation:AttributeMapping" target="description_status" source="description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketStatus_description" source="description"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketStatus_value" source="value"/>
     </input>
     <joinAttribute name="ticketStatus_value"/>
@@ -202,16 +154,13 @@
       <viewAttribute id="ticketPriority_value"/>
       <viewAttribute id="ticketStatus_value"/>
       <viewAttribute id="ticketTitle"/>
-      <viewAttribute id="defaultUser_userId"/>
-      <viewAttribute id="description_functionalArea"/>
-      <viewAttribute id="email_functionalArea"/>
-      <viewAttribute id="firstName_functionalArea"/>
-      <viewAttribute id="lastName_functionalArea"/>
-      <viewAttribute id="description_priority"/>
-      <viewAttribute id="description_status"/>
-      <viewAttribute id="email_creator"/>
-      <viewAttribute id="firstName_creator"/>
-      <viewAttribute id="lastName_creator"/>
+      <viewAttribute id="ticketPriority_description"/>
+      <viewAttribute id="ticketStatus_description"/>
+      <viewAttribute id="creator_email"/>
+      <viewAttribute id="creator_firstName"/>
+      <viewAttribute id="creator_lastName"/>
+    
+      <viewAttribute id="functionalArea_description"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="#Join_4_Ticket_Status">
@@ -226,17 +175,14 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketPriority_value" source="ticketPriority_value"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketStatus_value" source="ticketStatus_value"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketTitle" source="ticketTitle"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="defaultUser_userId" source="defaultUser_userId"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="description_functionalArea" source="description_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="email_functionalArea" source="email_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="firstName_functionalArea" source="firstName_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="lastName_functionalArea" source="lastName_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="description_priority" source="description_priority"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="description_status" source="description_status"/></input>
-    <input node="#Join_5_Ticket_Creator$$$$dev.dev01.statapp.data::STAT.Users$$">
-      <mapping xsi:type="Calculation:AttributeMapping" target="email_creator" source="email"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="firstName_creator" source="firstName"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="lastName_creator" source="lastName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketPriority_description" source="ticketPriority_description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketStatus_description" source="ticketStatus_description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="functionalArea_description" source="functionalArea_description"/>
+    </input>
+    <input node="#dev.dev01.statapp.data::STAT.Users">
+      <mapping xsi:type="Calculation:AttributeMapping" target="creator_email" source="email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="creator_firstName" source="firstName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="creator_lastName" source="lastName"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="creator_userId" source="userId"/>
     </input>
     <joinAttribute name="creator_userId"/>
@@ -254,19 +200,16 @@
       <viewAttribute id="ticketPriority_value"/>
       <viewAttribute id="ticketStatus_value"/>
       <viewAttribute id="ticketTitle"/>
-      <viewAttribute id="defaultUser_userId"/>
-      <viewAttribute id="description_functionalArea"/>
-      <viewAttribute id="email_functionalArea"/>
-      <viewAttribute id="firstName_functionalArea"/>
-      <viewAttribute id="lastName_functionalArea"/>
-      <viewAttribute id="description_priority"/>
-      <viewAttribute id="description_status"/>
-      <viewAttribute id="email_creator"/>
-      <viewAttribute id="firstName_creator"/>
-      <viewAttribute id="lastName_creator"/>
-      <viewAttribute id="email_assignee"/>
-      <viewAttribute id="firstName_assignee"/>
-      <viewAttribute id="lastName_assignee"/>
+      <viewAttribute id="ticketPriority_description"/>
+      <viewAttribute id="ticketStatus_description"/>
+      <viewAttribute id="creator_email"/>
+      <viewAttribute id="creator_firstName"/>
+      <viewAttribute id="creator_lastName"/>
+      <viewAttribute id="assignee_email"/>
+      <viewAttribute id="assignee_firstName"/>
+      <viewAttribute id="assignee_lastName"/>
+    
+      <viewAttribute id="functionalArea_description"/>
     </viewAttributes>
     <calculatedViewAttributes/>
     <input node="#Join_5_Ticket_Creator">
@@ -281,21 +224,18 @@
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketPriority_value" source="ticketPriority_value"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketStatus_value" source="ticketStatus_value"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="ticketTitle" source="ticketTitle"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="defaultUser_userId" source="defaultUser_userId"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="description_functionalArea" source="description_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="email_functionalArea" source="email_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="firstName_functionalArea" source="firstName_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="lastName_functionalArea" source="lastName_functionalArea"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="description_priority" source="description_priority"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="description_status" source="description_status"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="email_creator" source="email_creator"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="firstName_creator" source="firstName_creator"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="lastName_creator" source="lastName_creator"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketPriority_description" source="ticketPriority_description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketStatus_description" source="ticketStatus_description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="creator_email" source="creator_email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="creator_firstName" source="creator_firstName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="creator_lastName" source="creator_lastName"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="functionalArea_description" source="functionalArea_description"/>
     </input>
     <input node="#Join_6_Ticket_Assignee$$$$dev.dev01.statapp.data::STAT.Users$$">
-      <mapping xsi:type="Calculation:AttributeMapping" target="email_assignee" source="email"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="firstName_assignee" source="firstName"/>
-      <mapping xsi:type="Calculation:AttributeMapping" target="lastName_assignee" source="lastName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="assignee_email" source="email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="assignee_firstName" source="firstName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="assignee_lastName" source="lastName"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="assignee_userId" source="userId"/>
     </input>
     <joinAttribute name="assignee_userId"/>
@@ -347,61 +287,46 @@
       <descriptions defaultDescription="ticketTitle"/>
       <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="ticketTitle"/>
     </attribute>
-    <attribute id="defaultUser_userId" order="12" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="defaultUser_userId"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="defaultUser_userId"/>
-    </attribute>
-    <attribute id="description_functionalArea" order="13" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="description_functionalArea"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="description_functionalArea"/>
-    </attribute>
-    <attribute id="email_functionalArea" order="14" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="email_functionalArea"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="email_functionalArea"/>
-    </attribute>
-    <attribute id="firstName_functionalArea" order="15" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="firstName_functionalArea"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="firstName_functionalArea"/>
-    </attribute>
-    <attribute id="lastName_functionalArea" order="16" displayAttribute="false" attributeHierarchyActive="false">
-      <descriptions defaultDescription="lastName_functionalArea"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="lastName_functionalArea"/>
-    </attribute>
-    <attribute id="description_priority" order="17" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="ticketPriority_description" order="12" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="description_priority"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="description_priority"/>
+      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="ticketPriority_description"/>
     </attribute>
-    <attribute id="description_status" order="18" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="ticketStatus_description" order="13" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="description_status"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="description_status"/>
+      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="ticketStatus_description"/>
     </attribute>
-    <attribute id="email_creator" order="19" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="creator_email" order="14" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="email_creator"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="email_creator"/>
+      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="creator_email"/>
     </attribute>
-    <attribute id="firstName_creator" order="20" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="creator_firstName" order="15" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="firstName_creator"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="firstName_creator"/>
+      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="creator_firstName"/>
     </attribute>
-    <attribute id="lastName_creator" order="21" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="creator_lastName" order="16" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="lastName_creator"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="lastName_creator"/>
+      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="creator_lastName"/>
     </attribute>
-    <attribute id="email_assignee" order="22" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="assignee_email" order="17" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="email_assignee"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="email_assignee"/>
+      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="assignee_email"/>
     </attribute>
-    <attribute id="firstName_assignee" order="23" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="assignee_firstName" order="18" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="firstName_assignee"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="firstName_assignee"/>
+      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="assignee_firstName"/>
     </attribute>
-    <attribute id="lastName_assignee" order="24" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="assignee_lastName" order="19" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="lastName_assignee"/>
-      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="lastName_assignee"/>
+      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="assignee_lastName"/>
+    </attribute>
+  
+    <attribute id="functionalArea_description" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="functionalArea_description"/>
+      <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="functionalArea_description"/>
     </attribute>
   </attributes>
   <calculatedAttributes>
-    <calculatedAttribute id="countOpen" order="25" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false" hidden="false">
+    <calculatedAttribute id="countOpen" order="20" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false" hidden="false">
       <descriptions defaultDescription="countOpen"/>
       <keyCalculation datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
         <formula>if(isnull(&quot;dateClosed&quot;), 1, 0)</formula>
@@ -416,10 +341,6 @@
   <shapes>
     <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
       <upperLeftCorner x="40" y="85"/>
-    </shape>
-    <shape expanded="true" modelObjectName="Join_1_Default_User" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="99" y="573"/>
-      <rectangleSize height="30" width="140"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_2_Ticket_Func" modelObjectNameSpace="CalculationView">
       <upperLeftCorner x="87" y="451"/>

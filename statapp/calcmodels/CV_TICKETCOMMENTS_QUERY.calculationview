@@ -67,7 +67,7 @@
     </input>
     <joinAttribute name="JOIN$userId$author_userId"/>
   </calculationView>
-  <calculationView xsi:type="Calculation:JoinView" id="comments-ticket" joinType="inner" cardinality="CN_1">
+  <calculationView xsi:type="Calculation:JoinView" id="comments-ticket" joinType="rightOuter" cardinality="CN_1">
     <viewAttributes>
       <viewAttribute id="author_userId"/>
       <viewAttribute id="commentId"/>
