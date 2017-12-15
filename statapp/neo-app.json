@@ -1,0 +1,14 @@
+{
+   "welcomeFile": "/index.html",
+  "routes": [
+    {
+      "path": "/cmis",
+      "target": {
+        "type": "destination",
+        "name": "documentservice"
+      },
+      "description": "CMIS Connection Document Service"
+    }
+  ],
+  "sendWelcomeFileRedirect": true
+}

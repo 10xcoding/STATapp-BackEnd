@@ -15,7 +15,7 @@ BEGIN
     DECLARE lv_ticketstatus STRING;
     DECLARE lv_dateclosed STRING;
     
-    SELECT "ticketId", 4, CURRENT_DATE "current date"
+    SELECT "ticketId", 3, CURRENT_DATE "current date"
     INTO lv_ticketid, lv_ticketstatus, lv_dateclosed
     FROM :intab;
 

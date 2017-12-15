@@ -10,6 +10,8 @@ service {
     // CREATE
     "dev.dev01.statapp.data::STAT.Tickets" as "CreateTicket" create using "dev.dev01.statapp.procedures::createTicket"
                             update forbidden    delete forbidden;
+    "dev.dev01.statapp.data::STAT.Comments" as "CreateComment" create using "dev.dev01.statapp.procedures::createComment"
+                            update forbidden    delete forbidden;
     
     // UPDATE
     "dev.dev01.statapp.data::STAT.Tickets" as "UpdateTicket" update using "dev.dev01.statapp.procedures::updateTicket"

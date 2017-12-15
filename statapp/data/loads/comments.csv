@@ -1,0 +1,26 @@
+commentId,ticket,text,author,dateTime
+C550000000,Please try updating your drivers and let me know if that fixes the problem.,STU0000035,T000000011,2017-11-30 11:53.000
+C550000001,I'm also having this issue.,STU0000008,T000000019,2017-11-17 18:55.000
+C550000002,I'm also having the same problem.,STU0000032,T000000011,2017-11-24 12:35.000
+C550000003,Could this be due to a lack of compatiblility between the printers and the new laptop?,STU0000050,T000000000,2017-11-12 19:34.000
+C550000004,Have you tried doing a hard reset on the system?,STU0000032,T000000000,2017-10-19 12:41.000
+C550000005,Have you tried restarting your PC?,STU0000034,T000000014,2017-10-27 20:53.000
+C550000006,I addressed what I believe to be the issue,STU0000006,T000000014,2017-10-24 13:12.000
+C550000007,Have you tried refreshing your GUI?,STU0000010,T000000006,2017-11-20 22:44.000
+C550000008,Please try updating your PC and let me know if that fixes the problem.,STU0000004,T000000007,2017-10-27 20:55.000
+C550000009,Have you tried refreshing your web browser?,STU0000025,T000000005,2017-11-29 17:39.000
+C550000010,I think this might be a server issue. I'll investigate further and see what I can find.,STU0000016,T000000014,2017-10-27 23:58.000
+C550000011,Please try updating your drivers and let me know if that fixes the problem.,STU0000042,T000000012,2017-11-11 14:53.000
+C550000012,I addressed what I believe to be the issue. Try testing it now,STU0000023,T000000013,2017-10-14 14:19.000
+C550000013,I think this might be a server issue. I'll investigate further and see what I can find.,STU0000038,T000000009,2017-10-19 12:45.000
+C550000014,Have you tried refreshing your web browser?,STU0000002,T000000015,2017-11-25 15:54.000
+C550000015,Is this a compatiblility issue?,STU0000026,T000000003,2017-11-25 16:11.000
+C550000016,Could this be due to a lack of compatiblility between the printers and the new laptop?,STU0000025,T000000015,2017-10-23 13:49.000
+C550000017,I think this might be a server issue. I'll investigate further and see what I can find.,STU0000050,T000000001,2017-10-15 19:12.000
+C550000018,I'm also having this issue.,STU0000031,T000000004,2017-11-24 11:32.000
+C550000019,Have you tried doing a hard reset on the system?,STU0000041,T000000003,2017-10-20 17:17.000
+C550000020,Have you tried refreshing your web browser?,STU0000039,T000000002,2017-10-18 20:57.000
+C550000021,Could this be caused by a similar issue to ticket T100000094?,STU0000034,T000000017,2017-11-24 19:40.000
+C550000022,Could this be due to a lack of compatiblility between the printers and the new laptop?,STU0000005,T000000015,2017-10-19 17:56.000
+C550000023,Please try updating your drivers and let me know if that fixes the problem.,STU0000049,T000000005,2017-11-30 20:29.000
+C550000024,I think this might be a server-side issue. I'll investigate further and see what I can find.,STU0000050,T000000008,2017-10-15 14:38.000

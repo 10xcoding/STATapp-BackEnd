@@ -320,19 +320,12 @@
       <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="assignee_lastName"/>
     </attribute>
   
-    <attribute id="functionalArea_description" order="21" displayAttribute="false" attributeHierarchyActive="false">
+    <attribute id="functionalArea_description" order="20" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="functionalArea_description"/>
       <keyMapping columnObjectName="Join_6_Ticket_Assignee" columnName="functionalArea_description"/>
     </attribute>
   </attributes>
-  <calculatedAttributes>
-    <calculatedAttribute id="countOpen" order="20" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false" hidden="false">
-      <descriptions defaultDescription="countOpen"/>
-      <keyCalculation datatype="INTEGER" expressionLanguage="COLUMN_ENGINE">
-        <formula>if(isnull(&quot;dateClosed&quot;), 1, 0)</formula>
-      </keyCalculation>
-    </calculatedAttribute>
-  </calculatedAttributes>
+  <calculatedAttributes/>
   <baseMeasures/>
   <calculatedMeasures/>
   <restrictedMeasures/>

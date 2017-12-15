@@ -1,18 +1,85 @@
-<!DOCTYPE HTML>
+<!--<!DOCTYPE HTML>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--<meta http-equiv="content-type" content="text/html; charset=utf-8">-->
+<!--<title>Title Goes Here</title>-->
+<!--</head><body>-->
+<!--<p>This is my web page</p>-->
+<!--</body></html>-->
 
-<html lang="en">
-
+<!DOCTYPE html>
+<html>
 <head>
+<meta charset="utf-8">
+<title>Use CMIS from HTML5 Application</title>
+<script type="text/javascript">
+	function setFilename() {
+		var thefile = document.getElementById('filename').split('\\').pop();
+		document.getElementById("cmisname").value = thefile.value;
+	}
 
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-<title>Title Goes Here</title>
-
+	function getChildren() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var children = obj = JSON.parse(this.responseText);
+				var str = "<ul>";
+				var repoUrl = "/cmis/s0017130098/root/"; // TODO 
+				for (var i = 0; i <children.objects.length; i++) {
+					if (children.objects[i].object.properties["cmis:baseTypeId"].value == 'cmis:folder') {
+						str += '<li>'
+								+ children.objects[i].object.properties["cmis:name"].value
+								+ ' (folder)</li>';
+					} else {
+						var name = children.objects[i].object.properties["cmis:name"].value;
+						str += '<li><a href="' + repoUrl + name + '">' + name
+								+ '</a></li>';
+					}
+				}
+				str += "</ul>";
+				document.getElementById("listchildren").innerHTML = str;
+			}
+		};
+		xhttp.open("GET",
+				"/cmis/WebApp_ID/root?cmisselector=children", // TODO
+				true);
+		xhttp.send();
+	}
+</script>
 </head>
-
-
 <body>
-<p>This is my web page</p>
+	<h1>Document Service from HTML App</h1>
+	
+	<p>                     <!--TODO-->
+		<a href="https://statdocrepos0017130098trial.hanatrial.ondemand.com/CMISProxy/"> Link
+			to</a> Repository Info from Repository (requires authentication) <br />
+		<a href="/cmis/WebApp_ID?cmisselector=repositoryInfo">Link
+			using destination to </a> Repository Info from Repository
+	</p>            <!--TODO-->
+	
+	<hr/>
+	Upload a file to the document service (browse, then press upload)
+	                <!--TODO-->
+	<form action="/cmis/WebApp_ID/root"
+		enctype="multipart/form-data" method="post">
+		<p>
+			Please specify a file:<br> <input type="file" id="filename"
+				onchange="setFilename()" name="datafile" size="40">
+		</p>
+		<div>
+			<input type="submit" value="Upload"> 
+			<input name="cmisaction" type="hidden" value="createDocument"/> 
+			<input name="propertyId[0]" type="hidden" value="cmis:objectTypeId"/> 
+			<input name="propertyValue[0]" type="hidden" value="cmis:document"/> 
+			<input name="propertyId[1]" type="hidden" value="cmis:name"/> 
+			<input name="propertyValue[1]" type="hidden" id="cmisname"/>
+		</div>
+	</form>
+	
+	<hr/>
+	List all objects in the root folder of your repository (press button after uploding to refresh)
+	<br/>
+	<input type="button" onclick="getChildren()" value="List">
+	<div id="listchildren"></div>
 </body>
-
 </html>
