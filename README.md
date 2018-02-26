@@ -1,11 +1,11 @@
-## STAT application - Back End
+## STAT application - Back-end
 
-The back end for the STAT application ([front end available here](https://github.com/ffanizza10xcoding/STATapp-WebApp))
+The back-end for the STAT application ([front-end available here](https://github.com/ffanizza10xcoding/STATapp-WebApp))
 
 
 # STAT application
 
-STAT (short for SAP Ticketing And Tracking) is an ticket tracking application, designed in SAPUI5. STAT can be used to track system issues and create test scripts that integrate directly with any SAP system. Users can avoid the need to manage additional user accounts or websites and improve their issue resolution workflow.
+STAT (short for SAP Ticketing And Tracking) is a ticket tracking application, designed in SAPUI5. STAT can be used to track system issues and create test scripts that integrate directly with any SAP system. Users can avoid the need to manage additional user accounts or websites and improve their issue resolution workflow.
 
 ## Getting started with STAT
 
@@ -25,11 +25,11 @@ Clone or copy the contents of this repository into any directory of the main Con
 
 In the tables, edit the initial data as required, including users and functional areas. Note that the ticket priorities and ticket statuses can also be edited, but may have issues if they are not initialized to the defaults as defined in the csv files in the [loads folder](https://github.com/ffanizza10xcoding/STATapp-BackEnd/statapp/data/loads).
 
-Follow installation instructions for the [front end](https://github.com/ffanizza10xcoding/STATapp-WebApp).
+Follow installation instructions for the [front-end](https://github.com/ffanizza10xcoding/STATapp-WebApp).
 
 ## Using STAT
 
-Follow instructions for the [front end](https://github.com/ffanizza10xcoding/STATapp-WebApp) to use STAT. Note that currently, editing settings and default values requires using the SAP HANA Web-based Development Workbench.
+Follow instructions for the [front-end](https://github.com/ffanizza10xcoding/STATapp-WebApp) to use STAT. Note that currently, editing settings and default values requires using the SAP HANA Web-based Development Workbench.
 
 ## Built with
 
