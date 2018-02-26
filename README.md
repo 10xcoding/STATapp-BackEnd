@@ -44,7 +44,7 @@ Follow instructions for the [front-end](https://github.com/ffanizza10xcoding/STA
 
 ## License
 
-This application and project is licensed under the GNU Affero General Public License [AGPLv3](https://www.gnu.org/licenses/agpl-3.0.html#section13). See the [attached license](/) for details.
+This application and project is licensed under the GNU Affero General Public License [AGPLv3](https://www.gnu.org/licenses/agpl-3.0.html#section13). See the [attached license](/LICENSE) for details.
 
 ## Acknowledgments
 
