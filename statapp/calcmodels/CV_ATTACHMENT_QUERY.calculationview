@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_ATTACHMENT_QUERY" applyPrivilegeType="ANALYTIC_PRIVILEGE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="2.3" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_ATTACHMENT_QUERY"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="dev.dev01.statapp.data::STAT.Users" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Users"/>
+  </DataSource>
+  <DataSource id="dev.dev01.statapp.data::STAT.Attachments" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Attachments"/>
+  </DataSource>
+  <DataSource id="dev.dev01.statapp.data::STAT.Tickets" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Tickets"/>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="uploader_email"/>
+      <viewAttribute id="uploader_firstName"/>
+      <viewAttribute id="uploader_lastName"/>
+      <viewAttribute id="attachmentId"/>
+      <viewAttribute id="dateTime"/>
+      <viewAttribute id="description"/>
+      <viewAttribute id="file"/>
+      <viewAttribute id="fileName"/>
+      <viewAttribute id="ticket_ticketId"/>
+      <viewAttribute id="uploader_userId"/>
+      <viewAttribute id="JOIN$userId$uploader.userId" hidden="true"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#dev.dev01.statapp.data::STAT.Users">
+      <mapping xsi:type="Calculation:AttributeMapping" target="uploader_email" source="email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="uploader_firstName" source="firstName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="uploader_lastName" source="lastName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$userId$uploader.userId" source="userId"/>
+    </input>
+    <input node="#dev.dev01.statapp.data::STAT.Attachments">
+      <mapping xsi:type="Calculation:AttributeMapping" target="attachmentId" source="attachmentId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateTime" source="dateTime"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="description" source="description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="file" source="file"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="fileName" source="name"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticket_ticketId" source="ticket.ticketId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="uploader_userId" source="uploader.userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$userId$uploader.userId" source="uploader.userId"/>
+    </input>
+    <joinAttribute name="JOIN$userId$uploader.userId"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="uploader_email"/>
+      <viewAttribute id="uploader_firstName"/>
+      <viewAttribute id="uploader_lastName"/>
+      <viewAttribute id="attachmentId"/>
+      <viewAttribute id="dateTime"/>
+      <viewAttribute id="description"/>
+      <viewAttribute id="file"/>
+      <viewAttribute id="fileName"/>
+      <viewAttribute id="ticket_ticketId"/>
+      <viewAttribute id="uploader_userId"/>
+      <viewAttribute id="assignee_userId"/>
+      <viewAttribute id="creator_userId"/>
+      <viewAttribute id="dateClosed"/>
+      <viewAttribute id="dateCreated"/>
+      <viewAttribute id="dateStarted"/>
+      <viewAttribute id="functionalArea_value"/>
+      <viewAttribute id="ticketDescription"/>
+      <viewAttribute id="ticketPriority_value"/>
+      <viewAttribute id="ticketStatus_value"/>
+      <viewAttribute id="ticketTitle"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="uploader_email" source="uploader_email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="uploader_firstName" source="uploader_firstName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="uploader_lastName" source="uploader_lastName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="attachmentId" source="attachmentId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateTime" source="dateTime"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="description" source="description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="file" source="file"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="fileName" source="fileName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticket_ticketId" source="ticket_ticketId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="uploader_userId" source="uploader_userId"/>
+    </input>
+    <input node="#dev.dev01.statapp.data::STAT.Tickets">
+      <mapping xsi:type="Calculation:AttributeMapping" target="assignee_userId" source="assignee.userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="creator_userId" source="creator.userId"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateClosed" source="dateClosed"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateCreated" source="dateCreated"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="dateStarted" source="dateStarted"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="functionalArea_value" source="functionalArea.value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketDescription" source="ticketDescription"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketPriority_value" source="ticketPriority.value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketStatus_value" source="ticketStatus.value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticketTitle" source="ticketTitle"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="ticket_ticketId" source="ticketId"/>
+    </input>
+    <joinAttribute name="ticket_ticketId"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_2">
+  <attributes>
+    <attribute id="uploader_email" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="uploader_email"/>
+      <keyMapping columnObjectName="Join_2" columnName="uploader_email"/>
+    </attribute>
+    <attribute id="uploader_firstName" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="uploader_firstName"/>
+      <keyMapping columnObjectName="Join_2" columnName="uploader_firstName"/>
+    </attribute>
+    <attribute id="uploader_lastName" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="uploader_lastName"/>
+      <keyMapping columnObjectName="Join_2" columnName="uploader_lastName"/>
+    </attribute>
+    <attribute id="attachmentId" key="true" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="attachmentId"/>
+      <keyMapping columnObjectName="Join_2" columnName="attachmentId"/>
+    </attribute>
+    <attribute id="dateTime" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="dateTime"/>
+      <keyMapping columnObjectName="Join_2" columnName="dateTime"/>
+    </attribute>
+    <attribute id="description" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="description"/>
+      <keyMapping columnObjectName="Join_2" columnName="description"/>
+    </attribute>
+    <attribute id="file" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="file"/>
+      <keyMapping columnObjectName="Join_2" columnName="file"/>
+    </attribute>
+    <attribute id="fileName" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="fileName"/>
+      <keyMapping columnObjectName="Join_2" columnName="fileName"/>
+    </attribute>
+    <attribute id="ticket_ticketId" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticket_ticketId"/>
+      <keyMapping columnObjectName="Join_2" columnName="ticket_ticketId"/>
+    </attribute>
+    <attribute id="uploader_userId" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="uploader_userId"/>
+      <keyMapping columnObjectName="Join_2" columnName="uploader_userId"/>
+    </attribute>
+    <attribute id="assignee_userId" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="assignee_userId"/>
+      <keyMapping columnObjectName="Join_2" columnName="assignee_userId"/>
+    </attribute>
+    <attribute id="creator_userId" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="creator_userId"/>
+      <keyMapping columnObjectName="Join_2" columnName="creator_userId"/>
+    </attribute>
+    <attribute id="dateClosed" order="13" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="dateClosed"/>
+      <keyMapping columnObjectName="Join_2" columnName="dateClosed"/>
+    </attribute>
+    <attribute id="dateCreated" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="dateCreated"/>
+      <keyMapping columnObjectName="Join_2" columnName="dateCreated"/>
+    </attribute>
+    <attribute id="dateStarted" order="15" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="dateStarted"/>
+      <keyMapping columnObjectName="Join_2" columnName="dateStarted"/>
+    </attribute>
+    <attribute id="functionalArea_value" order="16" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="functionalArea_value"/>
+      <keyMapping columnObjectName="Join_2" columnName="functionalArea_value"/>
+    </attribute>
+    <attribute id="ticketDescription" order="17" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticketDescription"/>
+      <keyMapping columnObjectName="Join_2" columnName="ticketDescription"/>
+    </attribute>
+    <attribute id="ticketPriority_value" order="18" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticketPriority_value"/>
+      <keyMapping columnObjectName="Join_2" columnName="ticketPriority_value"/>
+    </attribute>
+    <attribute id="ticketStatus_value" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticketStatus_value"/>
+      <keyMapping columnObjectName="Join_2" columnName="ticketStatus_value"/>
+    </attribute>
+    <attribute id="ticketTitle" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ticketTitle"/>
+      <keyMapping columnObjectName="Join_2" columnName="ticketTitle"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="87" y="379"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="86" y="256"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

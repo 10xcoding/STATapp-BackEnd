@@ -5,13 +5,20 @@
         "extension": "jpg",
         "mimetype": "image/jpeg"
     }],
+    "allowMethods": [
+        "GET",
+        "PUT",
+        "POST",
+        "HEAD",
+        "OPTIONS"
+    ],
     "force_ssl": false,
     "enable_etags": true,
     "prevent_xsrf": false,
     "anonymous_connection": "dev.dev01.statapp::Anonymous_Access",
-    "cors": [{
-        "enabled": false
-    }],
+    "cors": {
+        "enabled": true
+    },
     "cache_control": "no-cache, no-store",
     "default_file": "index.html"
 }

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="test" applyPrivilegeType="ANALYTIC_PRIVILEGE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="2.3" defaultClient="$$client$$" visibility="internal" outputViewType="Projection" calculationScenarioType="TREE_BASED" enforceSqlExecution="false">
+<descriptions defaultDescription="test"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="dev.dev01.statapp.data::STAT.TicketPriorities" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.TicketPriorities"/>
+  </DataSource>
+  <DataSource id="dev.dev01.statapp.data::STAT.Users" type="DATA_BASE_TABLE">
+    <viewAttributes allViewAttributes="true"/>
+    <columnObject schemaName="10XCODING" columnObjectName="dev.dev01.statapp.data::STAT.Users"/>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <viewAttributes>
+      <viewAttribute id="description"/>
+      <viewAttribute id="value"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#dev.dev01.statapp.data::STAT.TicketPriorities">
+      <mapping xsi:type="Calculation:AttributeMapping" target="description" source="description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="value" source="value"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_2">
+    <viewAttributes>
+      <viewAttribute id="email"/>
+      <viewAttribute id="firstName"/>
+      <viewAttribute id="lastName"/>
+      <viewAttribute id="userId"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#dev.dev01.statapp.data::STAT.Users">
+      <mapping xsi:type="Calculation:AttributeMapping" target="email" source="email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="firstName" source="firstName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="lastName" source="lastName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="userId" source="userId"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:UnionView" id="Union_1">
+    <viewAttributes>
+      <viewAttribute id="email"/>
+      <viewAttribute id="firstName"/>
+      <viewAttribute id="lastName"/>
+      <viewAttribute id="userId"/>
+      <viewAttribute id="description"/>
+      <viewAttribute id="value"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="#Aggregation_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="email" source="email"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="firstName" source="firstName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="lastName" source="lastName"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="userId" source="userId"/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="description" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="value" null="true" value=""/>
+    </input>
+    <input node="#Aggregation_1">
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="email" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="firstName" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="lastName" null="true" value=""/>
+      <mapping xsi:type="Calculation:ConstantAttributeMapping" target="userId" null="true" value=""/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="description" source="description"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="value" source="value"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Union_1">
+  <attributes>
+    <attribute id="email" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="email"/>
+      <keyMapping columnObjectName="Union_1" columnName="email"/>
+    </attribute>
+    <attribute id="firstName" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="firstName"/>
+      <keyMapping columnObjectName="Union_1" columnName="firstName"/>
+    </attribute>
+    <attribute id="lastName" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="lastName"/>
+      <keyMapping columnObjectName="Union_1" columnName="lastName"/>
+    </attribute>
+    <attribute id="userId" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="userId"/>
+      <keyMapping columnObjectName="Union_1" columnName="userId"/>
+    </attribute>
+    <attribute id="description" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="description"/>
+      <keyMapping columnObjectName="Union_1" columnName="description"/>
+    </attribute>
+    <attribute id="value" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="value"/>
+      <keyMapping columnObjectName="Union_1" columnName="value"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="78" y="233"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Aggregation_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="130" y="331"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Union_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="77" y="503"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

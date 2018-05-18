@@ -1,7 +1,7 @@
 service {
 
     "dev.dev01.statapp.calcmodels/CV_USER_QUERY.calculationview" as "Users" keys ("userId");
-    
+    "dev.dev01.statapp.calcmodels/test.calculationview" as "test" keys ("userId") ;
 }
 
 settings {

@@ -1,0 +1,45 @@
+PROCEDURE "10XCODING"."dev.dev01.statapp.procedures::createAttachment" (
+    IN intab "10XCODING"."dev.dev01.statapp.data::STAT.Attachments",
+    OUT outtab "10XCODING"."dev.dev01.statapp.data::STAT.procedures.errors"
+)
+    
+    LANGUAGE SQLSCRIPT
+    SQL SECURITY INVOKER AS
+    --DEFAULT SCHEMA <schema>
+    -- READS SQL DATA AS
+
+BEGIN
+		
+    DECLARE lv_attachmentid STRING;
+    DECLARE lv_file BLOB;
+    DECLARE lv_name STRING;
+    DECLARE lv_description STRING;
+    DECLARE lv_uploaderId STRING;
+    DECLARE lv_ticket STRING;
+    DECLARE lv_datetimesec STRING;
+    
+    -- TODO : INPUT VALIDATION
+        -- TICKET_TICKET_ID
+        -- AUTHOR_USER_ID
+    
+    SELECT "attachmentId", "file", "name", "description", "uploader.userId", "ticket.ticketId", CURRENT_TIMESTAMP
+    INTO lv_attachmentid, lv_file, lv_name, lv_description, lv_uploaderId, lv_ticket, lv_datetimesec
+    FROM :intab;
+    
+    -- TODO: validation with NOT EXISTS
+    -- IF NOT EXISTS (SELECT * FROM "dev.dev01.statapp.data::STAT.Tickets" WHERE 'ticketId' = :lv_ticket) THEN
+    --     // Return error
+    -- END IF;
+    -- PREVENT INVALID VALUES
+    -- TODO: check max length of comment text
+    
+    IF :lv_name = '' THEN
+        outtab = SELECT 500 AS http_status_code,
+            'Invalid attachment name ' || lv_name AS error_message,
+                'Attachment name should not be empty' AS detail FROM DUMMY;
+    ELSE
+        INSERT INTO "dev.dev01.statapp.data::STAT.Attachments"
+            VALUES (CONCAT('F',"dev.dev01.statapp.data::attachment".NEXTVAL), lv_name, lv_description, lv_uploaderId, lv_ticket, lv_datetimesec, lv_file);
+    END IF;
+
+END;

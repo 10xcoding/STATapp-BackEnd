@@ -1,7 +1,7 @@
 namespace dev.dev01.statapp.data;
 @Schema: '10XCODING'
  
-context STAT {
+context STAT { 
 
     type BusinessKey: String(10);
     type CommentKey: String(10); // hana.ALPHANUM(10);
@@ -9,9 +9,10 @@ context STAT {
     type MString: String(80);
     type LString: String(512);
     type VLString: String(1024);
-    type SDate: LocalDate;
+    type SDate: UTCTimestamp;
     type DateTimeSec: UTCTimestamp;
     type Enumeration: Integer;
+    type File: LargeBinary;
     // type PhoneNumer: String(10);
 	
     @Catalog.tableType : #COLUMN 
@@ -75,20 +76,21 @@ context STAT {
     @Catalog.tableType : #COLUMN 
 	Entity Attachments {
 		key attachmentId: BusinessKey;
+		file: File; // Link to file?
 		name: LString;
 		description: VLString;
-		fileTypeValue: Association[1] to FileTypes {value};
+// 		fileTypeValue: Association[1] to FileTypes {value};
 // 		version: Integer; // Association[1] to Attachments {attachmentId}; ???
 		uploader: Association[1] to Users {userId};  
 		ticket: Association[1] to Tickets {ticketId};
 		dateTime: DateTimeSec;
 	};
 	
-    @Catalog.tableType : #COLUMN 
-	Entity FileTypes {
-		key value: Enumeration;
-		description: SString;
-	};
+//     @Catalog.tableType : #COLUMN 
+// 	Entity FileTypes {
+// 		key value: Enumeration;
+// 		description: SString;
+// 	};
 	
 	context procedures {
         type errors {

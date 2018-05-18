@@ -1,5 +1,4 @@
-import = [
-{
+import = [{
 	table = "dev.dev01.statapp.data::STAT.Comments";
 	schema = "10XCODING";
 	file = "dev.dev01.statapp.data.loads:comments.csv";

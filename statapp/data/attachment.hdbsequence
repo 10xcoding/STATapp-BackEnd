@@ -1,0 +1,1 @@
+schema= "10XCODING";start_with= 100000000;maxvalue=   999999999;nomaxvalue= false;minvalue= 0;nominvalue= true;cycles= false;depends_on_table= "dev.dev01.statapp.data::STAT.attachment";
