@@ -38,8 +38,8 @@ Follow instructions for the [front-end](https://github.com/ffanizza10xcoding/STA
 
 ## Authors
 
-* **Francesco Fanizza** - [10xCoding](10xcoding.com)
-* **Nestor Lara** - [10xCoding](10xcoding.com)
+* **[Francesco Fanizza](https://github.com/ffanizza10xcoding)** - [10xCoding](10xcoding.com)
+* **[Nestor Lara](https://github.com/nesl9)** - [10xCoding](10xcoding.com)
 * **Matthew Jacoby** - [10xCoding](10xcoding.com)
 
 ## License
